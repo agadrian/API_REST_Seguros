@@ -20,12 +20,14 @@ class SeguroController {
      */
     @GetMapping("/{id}") // Uri de este metodo --> localhost:8080/{id}
     fun getById(
-        @PathVariable id: String
+        @PathVariable id: String?
     ): Seguro {
 
-        if (id.isBlank()) throw BadRequestException("El ID no puede estar vacío")
+        if (id.isNullOrBlank()) throw BadRequestException("El ID no puede estar vacío")
 
-        if (id.toLongOrNull() !is Long) throw BadRequestException("El ID debe ser un número válido")
+        if (id.toLongOrNull() == null) throw BadRequestException("El ID debe ser un número válido")
+
+        if (id.toLong() <= 0) throw BadRequestException("La ID introducida no es válida")
 
 
         return seguroService.getById(id)
@@ -65,9 +67,12 @@ class SeguroController {
         @PathVariable id: String,
         @RequestBody newSeguro: Seguro
     ): Seguro {
+        println("Test")
         if (id.isBlank()) throw BadRequestException("La ID no puede estar vacía")
 
         if (id.toLongOrNull() !is Long) throw BadRequestException("El ID debe ser un número válido")
+
+        if (id.toLong() <= 0) throw BadRequestException("La ID introducida no es válida")
 
         return seguroService.updateById(id, newSeguro)
     }
@@ -80,10 +85,11 @@ class SeguroController {
     fun deleteById(
         @PathVariable id: String
     ) {
-        if (id.isBlank()) throw BadRequestException("La ID no puede estar vacía")
+        if (id.isEmpty()) throw BadRequestException("La ID no puede estar vacía")
 
         if (id.toLongOrNull() !is Long) throw BadRequestException("El ID debe ser un número válido")
 
+        if (id.toLong() <= 0) throw BadRequestException("La ID introducida no es válida")
 
         seguroService.deleteById(id)
         println("Seguro eliminado correcatemene")

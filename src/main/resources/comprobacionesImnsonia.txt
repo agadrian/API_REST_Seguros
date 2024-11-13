@@ -1,0 +1,32 @@
+
+GET:
+
+ALL: localhost:8080/seguros/
+
+localhost:8080/seguros/1
+localhost:8080/seguros/aaa
+localhost:8080/seguros/0
+localhost:8080/seguros/-1
+localhost:8080/seguros/99999
+
+
+DELETE:
+
+localhost:8080/seguros/1
+localhost:8080/seguros/1   (DE NUEVO PARA VER EL ERROR)
+localhost:8080/seguros/0
+localhost:8080/seguros/-1
+localhost:8080/seguros/9999
+localhost:8080/seguros/aaa
+
+
+POST y UPDATRE SUPONGO:
+
+Probar todos los campos que no pueden ser nulos, dejandolos vacios uno a uno
+Probar a dejar vacio el sexo poniendo embarazada en true  (deja hacerlo y pone sexo = Mujer)
+Probar a dejar vacio el sexo poniendo embarazada en false (error)
+Probar edad < 1   y   edad > 100
+Nif con letra miniscula se pone mayus (enseñarlo)
+
+
+
